@@ -25,6 +25,9 @@
 										</xsl:when>
 									</xsl:choose>
 								</xsl:for-each>
+								<xsl:for-each select="option">
+									<xsl:value-of select="position()"/>
+								</xsl:for-each>
 							</td>
 						</tr>
 					</xsl:for-each>
