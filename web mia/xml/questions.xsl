@@ -17,6 +17,11 @@
 					<xsl:for-each select="questions/question">
 						<tr>
 							<td><xsl:value-of select="title"/></td>
+							<td>
+								<xsl:for-each select="answer">
+									
+								</xsl:for-each>
+							</td>
 						</tr>
 					</xsl:for-each>
 				</table>
