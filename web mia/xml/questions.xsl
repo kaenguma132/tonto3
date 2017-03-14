@@ -19,7 +19,11 @@
 							<td><xsl:value-of select="title"/></td>
 							<td>
 								<xsl:for-each select="answer">
-									
+									<xsl:choose>
+										<xsl:when test="../type = 'text'">
+											<xsl:value-of select="text()"/>
+										</xsl:when>
+									</xsl:choose>
 								</xsl:for-each>
 							</td>
 						</tr>
