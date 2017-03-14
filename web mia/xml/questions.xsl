@@ -26,7 +26,8 @@
 									</xsl:choose>
 								</xsl:for-each>
 								<xsl:for-each select="option">
-									<xsl:value-of select="position()"/>
+									<xsl:variable name="posicion" select="position()-1"/>
+									Opción <xsl:value-of select="posicion+1"/>: <xsl:value-of select="text()"/>
 								</xsl:for-each>
 							</td>
 						</tr>
