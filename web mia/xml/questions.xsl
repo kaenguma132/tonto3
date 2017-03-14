@@ -14,6 +14,11 @@
 						<th>Opción</th>
 						<th>Respuesta</th>
 					</tr>
+					<xsl:for-each select="questions/question">
+						<tr>
+							<td><xsl:value-of select="title"/></td>
+						</tr>
+					</xsl:for-each>
 				</table>
 			</body>
 		</html>
