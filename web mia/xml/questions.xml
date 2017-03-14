@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/xsl" href="questions.xsl"?>
+
+<questions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="preguntas1.xsd">
+	<question id='dbz01'>
+		<type>text</type>
+		<title>1) ¿Como se llama el presonaje principal de serie Dragon Ball Z?</title>
+		<answer>Son Goku</answer>
+	</question>
+
+	<question id='dbz02'>
+		<type>text</type>
+		<title>2) ¿Como se llama el dragon de Dragon Ball Z?</title>
+		<answer>Shen Long</answer>
+	</question>
+
+	<question id='dbz03'>
+		<type>select</type>
+		<title>3) ¿Cuantos deseos conceden las bolas de dragon en Dragon Ball?</title>
+		<option>a) Tres</option>
+		<option>b) Cinco</option> 
+		<option>c) Uno</option>
+		<answer>2</answer> 
+	</question>
+
+	<question id='dbz04'>
+		<type>select</type>
+		<title>4) ¿Qué significa el nombre de kakaroto?</title>
+		<option>a) Zanahoria</option>
+		<option>b) Vegetal</option> 
+		<option>c) Pimiento</option>
+		<answer>0</answer> 
+	</question>
+
+	<question id='dbz05'>
+		<type>multiple</type>
+		<title>
+			5) ¿Como se suelen desplazar de un sitio a otro durante la historia de Dragon Ball Z?
+		</title>
+		<option>a) Volando</option>
+		<option>b) Coche</option> 
+		<option>c) Moto</option>
+		<option>d) Teletransporte</option>
+		<option>e) Barco</option> 
+		<option>f) Nave espacial</option>
+		<answer>0</answer>
+		<answer>3</answer>
+	</question>
+
+	<question id='dbz06'>
+		<type>radio</type>
+		<title>
+			6) ¿Cuanto tiempo tarda bulma, krillin y gohan en llegar a nameck?
+		</title>
+		<option>a) Varias horas</option>
+		<option>b) Una decadas</option> 
+		<option>c) Tres siglos</option>
+		<option>d) Cinco dias</option>
+		<option>e) Varios meses</option> 
+		<answer>4</answer>
+	</question>
+
+	<question id='dbz07'>
+		<type>checkbox</type>
+		<title>7) ¿Quien e estos personajes de Dragon Ball Z son Super Saiyajin?</title>
+		<option>a) Piccolo</option>
+		<option>b) Majin boo</option> 
+		<option>c) Krilin</option>
+		<option>d) Vegeta</option>
+		<option>e) Broly</option> 
+		<option>f) Trunks</option>
+		<option>g) Cell</option> 
+		<answer>3</answer>
+		<answer>4</answer>
+		<answer>5</answer>
+	</question>
+
+	<question id='dbz08'>
+		<type>checkbox</type>
+		<title>
+			8) ¿Cuales de lo siguientes son enemigos de Son Goku?
+		</title>
+		<option>a) Chi-chi</option>
+		<option>b) Ghoan</option> 
+		<option>c) Videl</option>
+		<option>d) Piccolo</option>
+		<option>e) Majin boo</option> 
+		<option>f) Krilin</option>
+		<option>g) Vegeta</option>
+		<option>h) Broly</option> 
+		<option>i) Trunks</option>
+		<option>j) Cell</option>
+		<answer>4</answer>
+		<answer>6</answer>
+		<answer>7</answer>
+		<answer>9</answer>
+	</question>
+
+	<question id='dbz09'>
+		<type>radio</type>
+		<title> 9) ¿Qué personaje a matado a Son Goku ?</title>
+		<option>a) Chi-chi</option>
+		<option>b) Cell</option>
+		<option>c) Trunks</option>
+		<option>d) Broly</option>
+		<option>e) Piccolo</option>
+		<answer>1</answer> 
+	</question>
+
+	<question id='dbz10'>
+		<type>multiple</type>
+		<title>10) ¿Quien sabe usar el kame hame ha en la serie Dragon Ball Z?</title>
+		<option>a) Gohan</option>
+		<option>b) Piccolo</option>
+		<option>c) Son Goku</option>
+		<option>d) Krilin</option>
+		<option>e) Trunks</option>
+		<option>f) Cell</option>
+		<answer>2</answer>
+		<answer>3</answer>
+		<answer>5</answer>
+
+	</question>
+
+</questions>

@@ -1,0 +1,82 @@
+body
+{
+	background-color: #2F5F5F;
+	font-family:v;
+	width: 100%;
+	padding:0;
+	margin:0;
+
+}
+#logo
+{
+	background: #89D692;
+	width: 100%;
+	margin-bottom: 20px;
+}
+form
+{
+	width: 70%;
+	margin: 0 auto;
+}
+img
+{
+	height:100px; 
+	width: 100px;
+}
+#titulo{display: inline-block;}
+h3
+{
+	color: red;
+	font-family:helvetica;
+	font-size:12px; 
+}
+h2
+{
+	color: red;
+	text-align:left;
+	text-decoration: underline;
+	font-family:helvetica;
+	font-size:16px; 
+	font-weight: bold;
+	text-transform: uppercase;
+}
+fieldset
+{
+	background-color:#89D692;
+	border: 5px;
+}
+
+input[type='submit']
+{
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#correcciones
+{
+	border-style:dotted;
+	color: white;
+	margin: 0 10% 0% 10%;
+	text-align:center;
+}
+
+select
+{
+	color: blue;
+}
+
+.radio,.checkbox
+{
+	color: blue;
+}
+
+h1
+{
+	font-size:16px;
+}
+
+#css-valid
+{
+	border:0;width:88px;height:31px
+}
