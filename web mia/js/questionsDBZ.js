@@ -54,20 +54,17 @@ window.onload = function()
 			res_dbz2_text, docXML.getElementById("dbz02"));
 		// correcion pregunta 3
 		corregirSelectSimple(formElement.getElementsByTagName("select")[0], 
-			res_dbz3_sel, "P3: Correcto",
-			"P3: Incorrecta, la respuesta correcta es: ");
+			res_dbz3_sel, docXML.getElementById("dbz03"));
 		// correcion pregunta 4
 		corregirSelectSimple(formElement.getElementsByTagName("select")[1], 
-			res_dbz4_sel, "P4: Correcto",
-			"P4: Incorrecta, la respuesta correcta es: ");
+			res_dbz4_sel, docXML.getElementById("dbz04"));
 		// correcion pregunta 5
 		corregirSelectMultiple(formElement.getElementsByTagName("select")[2], 
 			res_dbz5_mul, "P5: Correcto",
 			"P5: Incorrecta, las respuestas correctas son: ");
 		// correcion pregunta 6
 		corregirRadio(formElement.tiempo, 
-			res_dbz6_rad, "P6: Correcto",
-			"P6: Incorrecta, la respuesta correcta es: ", "tiempo");
+			res_dbz6_rad, docXML.getElementById("dbz06"));
 		// correcion pregunta 7
 		corregirCheckbox(formElement.saiyajin, 
 			res_dbz7_chb, "P7: Correcto",
@@ -78,8 +75,7 @@ window.onload = function()
 			"P8: Incorrecta, las respuestas correctas son: ", "enemigo");
 		// correcion pregunta 9
 		corregirRadio(formElement.personaje, 
-			res_dbz9_rad, "P9: Correcto",
-			"P9: Incorrecta, la respuesta correcta es: ", "personaje");
+			res_dbz9_rad, docXML.getElementById("dbz09"));
 		// correcion pregunta 10
 		corregirSelectMultiple(formElement.getElementsByTagName("select")[3], 
 			res_dbz10_mul, "P10: Correcto",
@@ -278,17 +274,15 @@ function corregirTexto(valor, correcta, preguntaXML)
 	preguntaXML.appendChild(useranswer);
 }
 
-function corregirSelectSimple(select, correcta, mensajeOK, mensajeError)
+function corregirSelectSimple(select, correcta, preguntaXML)
 {
 	if(select.value == correcta)
 	{
-		mostrarCorreccion(mensajeOK);
 		nota += 1;
 	}
-	else
-	{
-		mostrarCorreccion(mensajeError + select[correcta].innerHTML);
-	}
+	useranswer = docXML.createElement("useranswer");
+	useranswer.innerHTML = select;
+	preguntaXML.appendChild(useranswer);
 }
 
 function corregirSelectMultiple(select, correctas, mensajeOK, mensajeError)
@@ -330,7 +324,7 @@ function corregirSelectMultiple(select, correctas, mensajeOK, mensajeError)
 	}
 }
 
-function corregirRadio(radio, correcta, mensajeOK, mensajeError, atributo)
+function corregirRadio(radio, correcta, preguntaXML)
 {
 	// ponemos valor -1 por si el usuario no ha seleccionado ninguna, que tenga algo que comparar
 	var value = -1;
@@ -345,13 +339,11 @@ function corregirRadio(radio, correcta, mensajeOK, mensajeError, atributo)
 	}
 	if(value == correcta)
 	{
-		mostrarCorreccion(mensajeOK);
 		nota += 1;
 	}
-	else
-	{
-		mostrarCorreccion(mensajeError + document.getElementById(atributo+correcta).innerHTML);
-	}
+	useranswer = docXML.createElement("useranswer");
+	useranswer.innerHTML = select;
+	preguntaXML.appendChild(useranswer);
 }
 
 function corregirCheckbox(checkbox, correctas, mensajeOK, mensajeError, atributo)
