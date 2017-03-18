@@ -117,6 +117,8 @@ function gestionarXml(datosXML)
 	var radioHTML;
 	// numero de respuestas de multiple
 	var num_res_mul;
+	// variables de xpath
+	var xpath;
 	
 
 	//pregunta 1
@@ -135,12 +137,16 @@ function gestionarXml(datosXML)
 	preguntaXML = docXML.getElementsByTagName("title")[2].innerHTML;
 	preguntaHTML = document.getElementById("dbz03");
 	selectHTML = document.getElementsByTagName("select")[0];
+	/*
 	num_opciones = docXML.getElementById("dbz03").getElementsByTagName("option").length;
 	for(i = 0; i < num_opciones; i++)
 	{
 		selectmulOpciones[i] = docXML.getElementById("dbz03").getElementsByTagName("option")[i].innerHTML;
 	}
-	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, selectmulOpciones);
+	*/
+	xpath = "/questions/question[@id='dbz03']/option";
+	var nodos = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosSelectHtmlNodos(preguntaHTML, preguntaXML, selectHTML, nodos);
 	res_dbz3_sel = parseInt(docXML.getElementById("dbz03").getElementsByTagName("answer")[0].innerHTML);
 
 	//pregunta 4
@@ -269,6 +275,30 @@ function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, selectOpcio
 		option.value = i;
 		selectHTML.options.add(option);
 	}  
+}
+
+function ponerDatosSelectHtmlNodos(elementoHTML, elementoXML, selectHTML, nodos)
+{
+	elementoHTML.innerHTML = elementoXML;
+	var resultado = nodos.iterateNext();
+	/*
+	for (i = 0; i < selectOpciones.length; i++)
+	{ 
+		option = document.createElement("option");
+		option.text = selectOpciones[i];
+		option.value = i;
+		selectHTML.options.add(option);
+	}
+	*/
+	var i = 0;
+	while(resultado)
+	{
+		option = document.createElement("option");
+		option.text = resultado.innerHTML;
+		option.value = i; i++;
+		selectHTML.options.add(option);
+		result = nodes.iterateNext();
+	} 
 }
 
 function ponerDatosCheckboxHtml(elementoHTML, elementoXML, checkboxHTML, checkboxOpciones, atributo, tipo)
