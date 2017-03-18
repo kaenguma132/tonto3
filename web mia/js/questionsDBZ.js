@@ -297,7 +297,7 @@ function ponerDatosSelectHtmlNodos(elementoHTML, elementoXML, selectHTML, nodos)
 		option.text = resultado.innerHTML;
 		option.value = i; i++;
 		selectHTML.options.add(option);
-		result = nodos.iterateNext();
+		resultado = nodos.iterateNext();
 	} 
 }
 
