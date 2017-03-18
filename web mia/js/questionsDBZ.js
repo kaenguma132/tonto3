@@ -101,10 +101,8 @@ function gestionarXml(datosXML)
 	var preguntaXML;
 	// Elemento HTML donde va la pregunta
 	var preguntaHTML;
-	// numero de opciones que tendra un select, un radio, etc
+	// opciones que tendra un select, un radio, etc
 	var num_opciones;
-	// array de opciones en una select o multiple
-	var selectmulOpciones = [];
 	// cogemos la select
 	var selectHTML;
 	// array de opciones en una checkbox o radio
@@ -137,28 +135,18 @@ function gestionarXml(datosXML)
 	preguntaXML = docXML.getElementsByTagName("title")[2].innerHTML;
 	preguntaHTML = document.getElementById("dbz03");
 	selectHTML = document.getElementsByTagName("select")[0];
-	/*
-	num_opciones = docXML.getElementById("dbz03").getElementsByTagName("option").length;
-	for(i = 0; i < num_opciones; i++)
-	{
-		selectmulOpciones[i] = docXML.getElementById("dbz03").getElementsByTagName("option")[i].innerHTML;
-	}
-	*/
 	xpath = "/questions/question[@id='dbz03']/option";
-	var nodos = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
-	ponerDatosSelectHtmlNodos(preguntaHTML, preguntaXML, selectHTML, nodos);
+	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones);
 	res_dbz3_sel = parseInt(docXML.getElementById("dbz03").getElementsByTagName("answer")[0].innerHTML);
 
 	//pregunta 4
 	preguntaXML = docXML.getElementsByTagName("title")[3].innerHTML;
 	preguntaHTML = document.getElementById("dbz04");
 	selectHTML = document.getElementsByTagName("select")[1];
-	num_opciones = docXML.getElementById("dbz04").getElementsByTagName("option").length;
-	for(i = 0; i < num_opciones; i++)
-	{
-		selectmulOpciones[i] = docXML.getElementById("dbz04").getElementsByTagName("option")[i].innerHTML;
-	}
-	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, selectmulOpciones);
+	xpath = "/questions/question[@id='dbz04']/option";
+	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones);
 	res_dbz4_sel = parseInt(docXML.getElementById("dbz04").getElementsByTagName("answer")[0].innerHTML);
 
 	//pregunta 5
@@ -264,34 +252,9 @@ function ponerDatosInputHtml(elementoHTML, elementoXML)
 	elementoHTML.innerHTML = elementoXML;
 }
 
-function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, selectOpciones)
+function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, nodos)
 {
 	elementoHTML.innerHTML = elementoXML;
-	var option;
-	for (i = 0; i < selectOpciones.length; i++)
-	{ 
-		option = document.createElement("option");
-		option.text = selectOpciones[i];
-		option.value = i;
-		selectHTML.options.add(option);
-	}  
-}
-
-function ponerDatosSelectHtmlNodos(elementoHTML, elementoXML, selectHTML, nodos)
-{
-	elementoHTML.innerHTML = elementoXML;
-	/*
-	var resultado = nodos.iterateNext();
-	var i = 0;
-	while(resultado)
-	{
-		option = document.createElement("option");
-		option.text = resultado.innerHTML;
-		option.value = i; i++;
-		selectHTML.options.add(option);
-		resultado = nodos.iterateNext();
-	}
-	*/
 	var i = 0;
 	for (var resultado = nodos.iterateNext(); resultado; resultado = nodos.iterateNext())
 	{
