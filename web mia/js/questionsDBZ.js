@@ -259,9 +259,9 @@ function ponerDatosCheckboxRadioHtml(elementoHTML, elementoXML, checkboxradioHTM
 		label.setAttribute("id", atributo+i);
 		input.type = tipo;
 		input.name = atributo;
-		checkboxHTML.appendChild(input);
-		checkboxHTML.appendChild(label);
-		checkboxHTML.appendChild(document.createElement("br"));
+		checkboxradioHTML.appendChild(input);
+		checkboxradioHTML.appendChild(label);
+		checkboxradioHTML.appendChild(document.createElement("br"));
 	}
 }
 
