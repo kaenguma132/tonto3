@@ -280,16 +280,8 @@ function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, selectOpcio
 function ponerDatosSelectHtmlNodos(elementoHTML, elementoXML, selectHTML, nodos)
 {
 	elementoHTML.innerHTML = elementoXML;
-	var resultado = nodos.iterateNext();
 	/*
-	for (i = 0; i < selectOpciones.length; i++)
-	{ 
-		option = document.createElement("option");
-		option.text = selectOpciones[i];
-		option.value = i;
-		selectHTML.options.add(option);
-	}
-	*/
+	var resultado = nodos.iterateNext();
 	var i = 0;
 	while(resultado)
 	{
@@ -298,7 +290,16 @@ function ponerDatosSelectHtmlNodos(elementoHTML, elementoXML, selectHTML, nodos)
 		option.value = i; i++;
 		selectHTML.options.add(option);
 		resultado = nodos.iterateNext();
-	} 
+	}
+	*/
+	var i = 0;
+	for (var resultado = nodos.iterateNext(); resultado; resultado = nodos.iterateNext())
+	{
+		option = document.createElement("option");
+		option.text = resultado.innerHTML;
+		option.value = i; i++;
+		selectHTML.options.add(option);
+	}
 }
 
 function ponerDatosCheckboxHtml(elementoHTML, elementoXML, checkboxHTML, checkboxOpciones, atributo, tipo)
