@@ -28,6 +28,12 @@
 								<xsl:for-each select="option">
 									<xsl:variable name="posicion" select="position()-1"/>
 									Opción <xsl:value-of select="$posicion+1"/>: <xsl:value-of select="text()"/>
+									<xsl:for-each select="../answer">
+										<xsl:variable name="correctanswer" select="text()"/>
+										<xsl:if test="$optposition=$correctanswer">
+											<span>&#x2713;</span>
+										</xsl:if>
+									</xsl:for-each><br/><br/>
 								</xsl:for-each>
 							</td>
 						</tr>
