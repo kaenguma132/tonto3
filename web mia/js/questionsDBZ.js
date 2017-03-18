@@ -153,13 +153,9 @@ function gestionarXml(datosXML)
 	preguntaXML = docXML.getElementsByTagName("title")[4].innerHTML;
 	preguntaHTML = document.getElementById("dbz05");
 	selectHTML = document.getElementsByTagName("select")[2];
-	num_opciones = docXML.getElementById("dbz05").getElementsByTagName("option").length;
-	for(i = 0; i < num_opciones; i++)
-	{
-		selectmulOpciones[i] = docXML.getElementById("dbz05").getElementsByTagName("option")[i].innerHTML;
-	}
-	// la select multiple se imprime igual que la select simple
-	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, selectmulOpciones);
+	xpath = "/questions/question[@id='dbz05']/option";
+	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones);
 	num_res_mul = docXML.getElementById("dbz05").getElementsByTagName("answer").length;
 	for(i = 0; i < num_res_mul; i++)
 	{
@@ -230,13 +226,9 @@ function gestionarXml(datosXML)
 	preguntaXML = docXML.getElementsByTagName("title")[9].innerHTML;
 	preguntaHTML = document.getElementById("dbz10");
 	selectHTML = document.getElementsByTagName("select")[3];
-	num_opciones = docXML.getElementById("dbz10").getElementsByTagName("option").length;
-	for(i = 0; i < num_opciones; i++)
-	{
-		selectmulOpciones[i] = docXML.getElementById("dbz10").getElementsByTagName("option")[i].innerHTML;
-	}
-	// la select multiple se imprime igual que la select simple
-	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, selectmulOpciones);
+	xpath = "/questions/question[@id='dbz10']/option";
+	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones);
 	num_res_mul = docXML.getElementById("dbz10").getElementsByTagName("answer").length;
 	for(i = 0; i < num_res_mul; i++)
 	{
