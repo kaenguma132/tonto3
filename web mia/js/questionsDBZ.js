@@ -166,12 +166,9 @@ function gestionarXml(datosXML)
 	preguntaXML = docXML.getElementsByTagName("title")[5].innerHTML;
 	preguntaHTML = document.getElementById("dbz06");
 	radioHTML = document.getElementsByClassName("radio")[0];
-	num_opciones = docXML.getElementById("dbz06").getElementsByTagName("option").length;
-	for(i = 0; i < num_opciones; i++)
-	{
-		checkradioOpciones[i] = docXML.getElementById("dbz06").getElementsByTagName("option")[i].innerHTML;
-	}
-	ponerDatosCheckboxHtml(preguntaHTML, preguntaXML, radioHTML, checkradioOpciones, "tiempo", "radio");
+	xpath = "/questions/question[@id='dbz06']/option";
+	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosCheckboxRadioHtml(preguntaHTML, preguntaXML, radioHTML, num_opciones, "tiempo", "radio");
 	res_dbz6_rad = parseInt(docXML.getElementById("dbz06").getElementsByTagName("answer")[0].innerHTML);
 	checkradioOpciones = [];
 
@@ -179,12 +176,9 @@ function gestionarXml(datosXML)
 	preguntaXML = docXML.getElementsByTagName("title")[6].innerHTML;
 	preguntaHTML = document.getElementById("dbz07");
 	checkboxHTML = document.getElementsByClassName("checkbox")[0];
-	num_opciones = docXML.getElementById("dbz07").getElementsByTagName("option").length;
-	for(i = 0; i < num_opciones; i++)
-	{
-		checkradioOpciones[i] = docXML.getElementById("dbz07").getElementsByTagName("option")[i].innerHTML;
-	}
-	ponerDatosCheckboxHtml(preguntaHTML, preguntaXML, checkboxHTML, checkradioOpciones, "saiyajin", "checkbox");
+	xpath = "/questions/question[@id='dbz07']/option";
+	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosCheckboxRadioHtml(preguntaHTML, preguntaXML, checkboxHTML, num_opciones, "saiyajin", "checkbox");
 	num_res_checkbox = docXML.getElementById("dbz07").getElementsByTagName("answer").length;
 	for(i = 0; i < num_res_checkbox; i++)
 	{
@@ -196,12 +190,9 @@ function gestionarXml(datosXML)
 	preguntaXML = docXML.getElementsByTagName("title")[7].innerHTML;
 	preguntaHTML = document.getElementById("dbz08");
 	checkboxHTML = document.getElementsByClassName("checkbox")[1];
-	num_opciones = docXML.getElementById("dbz08").getElementsByTagName("option").length;
-	for(i = 0; i < num_opciones; i++)
-	{
-		checkradioOpciones[i] = docXML.getElementById("dbz08").getElementsByTagName("option")[i].innerHTML;
-	}
-	ponerDatosCheckboxHtml(preguntaHTML, preguntaXML, checkboxHTML, checkradioOpciones, "enemigo", "checkbox");
+	xpath = "/questions/question[@id='dbz08']/option";
+	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosCheckboxRadioHtml(preguntaHTML, preguntaXML, checkboxHTML, num_opciones, "enemigo", "checkbox");
 	num_res_checkbox = docXML.getElementById("dbz08").getElementsByTagName("answer").length;
 	for(i = 0; i < num_res_checkbox; i++)
 	{
@@ -213,12 +204,9 @@ function gestionarXml(datosXML)
 	preguntaXML = docXML.getElementsByTagName("title")[8].innerHTML;
 	preguntaHTML = document.getElementById("dbz09");
 	radioHTML = document.getElementsByClassName("radio")[1];
-	num_opciones = docXML.getElementById("dbz09").getElementsByTagName("option").length;
-	for(i = 0; i < num_opciones; i++)
-	{
-		checkradioOpciones[i] = docXML.getElementById("dbz09").getElementsByTagName("option")[i].innerHTML;
-	}
-	ponerDatosCheckboxHtml(preguntaHTML, preguntaXML, radioHTML, checkradioOpciones, "personaje", "radio");
+	xpath = "/questions/question[@id='dbz09']/option";
+	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
+	ponerDatosCheckboxRadioHtml(preguntaHTML, preguntaXML, radioHTML, num_opciones, "personaje", "radio");
 	res_dbz9_rad = parseInt(docXML.getElementById("dbz09").getElementsByTagName("answer")[0].innerHTML);
 	checkradioOpciones = [];
 
@@ -257,16 +245,17 @@ function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, nodos)
 	}
 }
 
-function ponerDatosCheckboxHtml(elementoHTML, elementoXML, checkboxHTML, checkboxOpciones, atributo, tipo)
+function ponerDatosCheckboxRadioHtml(elementoHTML, elementoXML, checkboxradioHTML, nodos, atributo, tipo)
 {
 	elementoHTML.innerHTML = elementoXML;
 	var input;
 	var label;
-	for (i = 0; i < checkboxOpciones.length; i++)
+	var i = 0;
+	for (var resultado = nodos.iterateNext(); resultado; resultado = nodos.iterateNext())
 	{
 		input = document.createElement("input");
 		label = document.createElement("label");
-		label.innerHTML = checkboxOpciones[i];
+		label.innerHTML = resultado.innerHTML;
 		label.setAttribute("id", atributo+i);
 		input.type = tipo;
 		input.name = atributo;
