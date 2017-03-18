@@ -12,6 +12,7 @@ var res_dbz10_mul = [];
 var nota = 0;  //nota de la prueba sobre 10 puntos (hay 10 preguntas)
 var docXML = null; //variable para documento XML global, para modificarlo y serializarlo (y sacarlo por pantalla)
 var docXSL = null; // variable para documento XSL
+var useranswer; // variables para crear el elemento de respuesta dle usuairo en el XML
 
 //**************************************************************************************************** 
 //Después de cargar la página (onload) se definen los eventos sobre los elementos entre otras acciones.
@@ -47,12 +48,10 @@ window.onload = function()
 		inicializar();
 		// correcion pregunta 1
 		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
-			res_dbz1_text, "P1: Correcto", 
-			"P1: Incorrecto, la respuesta correcta es: " + res_dbz1_text);
+			res_dbz1_text, docXML.getElementById("dbz01"));
 		// correcion pregunta 2
-		corregirTexto(formElement.getElementsByClassName("texto")[1].value, 
-			res_dbz2_text, "P2: Correcto", 
-			"P2: Incorrecto, la respuesta correcta es: " + res_dbz2_text);
+		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
+			res_dbz2_text, docXML.getElementById("dbz02"));
 		// correcion pregunta 3
 		corregirSelectSimple(formElement.getElementsByTagName("select")[0], 
 			res_dbz3_sel, "P3: Correcto",
@@ -268,17 +267,15 @@ function ponerDatosCheckboxRadioHtml(elementoHTML, elementoXML, checkboxradioHTM
 //****************************************************************************************************
 //implementación de la corrección
 
-function corregirTexto(valor, correcta, mensajeOK, mensajeError)
+function corregirTexto(valor, correcta, preguntaXML)
 {
 	if(valor.toLowerCase() == correcta.toLowerCase())
 	{
-		mostrarCorreccion(mensajeOK);
 		nota += 1;
 	}
-	else
-	{
-		mostrarCorreccion(mensajeError);
-	}
+	useranswer = docXML.createElement("useranswer");
+	useranswer.innerHTML = valor;
+	preguntaXML.appendChild(useranswer);
 }
 
 function corregirSelectSimple(select, correcta, mensajeOK, mensajeError)
@@ -406,7 +403,22 @@ function mostrarCorreccion(texto)
 
 function mostrarNota()
 {
+	document.getElementById('correcciones').style.display = "block";
+	//Código transformación xslt con xmlDoc y xslDoc
+	if (document.implementation && document.implementation.createDocument)
+	{
+		xsltProcessor = new XSLTProcessor();
+		xsltProcessor.importStylesheet(docXSL);
+		resultDocument = xsltProcessor.transformToFragment(docXML, document);
+		document.getElementById('correcciones').appendChild(resultDocument);
+	}
 	mostrarCorreccion("Tu nota es de " + nota + " punto(s) sobre 10.");
+	 //bloquear formulario (recargar para volver a empezar)
+	 var e = formElement.elements;
+	 for (var i = 0, len = e.length; i < len; ++i)
+	 {
+	 	e[i].disabled = true;
+	 }
 }
 
 function inicializar()
