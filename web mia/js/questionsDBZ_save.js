@@ -10,7 +10,7 @@ var res_dbz8_chb = [];
 var res_dbz9_rad = null;
 var res_dbz10_mul = [];
 var nota = 0;  //nota de la prueba sobre 10 puntos (hay 10 preguntas)
-var docXML = null; //variable para documento XML global, para modificarlo y serializarlo (y sacarlo por pantalla)
+var docXML; //variable para documento XML global, para modificarlo y serializarlo (y sacarlo por pantalla)
 var docXSL = null; // variable para documento XSL
 var useranswer = null; // variables para crear el elemento de respuesta del usuairo en el XML
 
@@ -263,7 +263,6 @@ function gestionarXml(datosXML)
 	{
 		res_dbz10_mul[i] = parseInt(docXML.getElementById("dbz10").getElementsByTagName("answer")[i].innerHTML);
 	}
-
 }
 
 //****************************************************************************************************
