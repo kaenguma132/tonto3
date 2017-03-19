@@ -218,35 +218,36 @@ function ponerDatosInputHtml(elementoHTML, elementoXML)
 	elementoHTML.innerHTML = elementoXML;
 }
 
-function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, selectOpciones)
+function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, nodos)
 {
 	elementoHTML.innerHTML = elementoXML;
-	var option;
-	for (i = 0; i < selectOpciones.length; i++)
-	{ 
+	var i = 0;
+	for (var resultado = nodos.iterateNext(); resultado; resultado = nodos.iterateNext())
+	{
 		option = document.createElement("option");
-		option.text = selectOpciones[i];
-		option.value = i;
+		option.text = resultado.innerHTML;
+		option.value = i; i++;
 		selectHTML.options.add(option);
-	}  
+	}
 }
 
-function ponerDatosCheckboxRadioHtml(elementoHTML, elementoXML, checkboxHTML, checkboxOpciones, atributo, tipo)
+function ponerDatosCheckboxRadioHtml(elementoHTML, elementoXML, checkboxradioHTML, nodos, atributo, tipo)
 {
 	elementoHTML.innerHTML = elementoXML;
 	var input;
 	var label;
-	for (i = 0; i < checkboxOpciones.length; i++)
+	var i = 0;
+	for (var resultado = nodos.iterateNext(); resultado; resultado = nodos.iterateNext())
 	{
 		input = document.createElement("input");
 		label = document.createElement("label");
-		label.innerHTML = checkboxOpciones[i];
+		label.innerHTML = resultado.innerHTML;
 		label.setAttribute("id", atributo+i);
 		input.type = tipo;
 		input.name = atributo;
-		checkboxHTML.appendChild(input);
-		checkboxHTML.appendChild(label);
-		checkboxHTML.appendChild(document.createElement("br"));
+		checkboxradioHTML.appendChild(input);
+		checkboxradioHTML.appendChild(label);
+		checkboxradioHTML.appendChild(document.createElement("br"));
 	}
 }
 

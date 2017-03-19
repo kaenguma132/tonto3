@@ -138,7 +138,6 @@ function gestionarXml(datosXML)
 {
 	// Aqui pillamos el documento XML
 	var docXML = datosXML.responseXML;
-	console.log(docXML);
 	// Llamar a pregunta XML
 	var preguntaXML;
 	// Elemento HTML donde va la pregunta
