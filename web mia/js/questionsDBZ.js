@@ -29,7 +29,6 @@ window.onload = function()
 			gestionarXml(this);
 		}
 	};
-	console.log(docXML);
 	httpXML.open("GET", "xml/questions.xml", true);
 	httpXML.send();
 	//LEER XSL de xml/questions.xml
@@ -47,7 +46,7 @@ window.onload = function()
 	formElement.onsubmit=function()
 	{
 		inicializar();
-		console.log(docXML.getElementById("dbz01"));
+		/*
 		// correcion pregunta 1
 		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
 			res_dbz1_text, docXML.getElementById("dbz01"));
@@ -85,6 +84,49 @@ window.onload = function()
 		console.log("Ya he corregido las preguntas");
 		mostrarNota();
 		console.log("Ya he mostrado la nota");
+		return false;
+		*/
+		// correcion pregunta 1
+		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
+			res_dbz1_text, "P1: Correcto", 
+			"P1: Incorrecto, la respuesta correcta es: " + res_dbz1_text);
+		// correcion pregunta 2
+		corregirTexto(formElement.getElementsByClassName("texto")[1].value, 
+			res_dbz2_text, "P2: Correcto", 
+			"P2: Incorrecto, la respuesta correcta es: " + res_dbz2_text);
+		// correcion pregunta 3
+		corregirSelectSimple(formElement.getElementsByTagName("select")[0], 
+			res_dbz3_sel, "P3: Correcto",
+			"P3: Incorrecta, la respuesta correcta es: ");
+		// correcion pregunta 4
+		corregirSelectSimple(formElement.getElementsByTagName("select")[1], 
+			res_dbz4_sel, "P4: Correcto",
+			"P4: Incorrecta, la respuesta correcta es: ");
+		// correcion pregunta 5
+		corregirSelectMultiple(formElement.getElementsByTagName("select")[2], 
+			res_dbz5_mul, "P5: Correcto",
+			"P5: Incorrecta, las respuestas correctas son: ");
+		// correcion pregunta 6
+		corregirRadio(formElement.tiempo, 
+			res_dbz6_rad, "P6: Correcto",
+			"P6: Incorrecta, la respuesta correcta es: ", "tiempo");
+		// correcion pregunta 7
+		corregirCheckbox(formElement.saiyajin, 
+			res_dbz7_chb, "P7: Correcto",
+			"P7: Incorrecta, las respuestas correctas son: ", "saiyajin");
+		// correcion pregunta 8
+		corregirCheckbox(formElement.enemigo, 
+			res_dbz8_chb, "P8: Correcto",
+			"P8: Incorrecta, las respuestas correctas son: ", "enemigo");
+		// correcion pregunta 9
+		corregirRadio(formElement.personaje, 
+			res_dbz9_rad, "P9: Correcto",
+			"P9: Incorrecta, la respuesta correcta es: ", "personaje");
+		// correcion pregunta 10
+		corregirSelectMultiple(formElement.getElementsByTagName("select")[3], 
+			res_dbz10_mul, "P10: Correcto",
+			"P10: Incorrecta, la respuestas correctas son: ");
+		mostrarNota();
 		return false;
 	}
 }
@@ -270,6 +312,7 @@ function ponerDatosCheckboxRadioHtml(elementoHTML, elementoXML, checkboxradioHTM
 
 function corregirTexto(valor, correcta, preguntaXML)
 {
+	/*
 	if(valor.toLowerCase() == correcta.toLowerCase())
 	{
 		nota += 1;
@@ -277,10 +320,21 @@ function corregirTexto(valor, correcta, preguntaXML)
 	useranswer = docXML.createElement("useranswer");
 	useranswer.innerHTML = valor;
 	preguntaXML.appendChild(useranswer);
+	*/
+	if(valor.toLowerCase() == correcta.toLowerCase())
+	{
+		mostrarCorreccion(mensajeOK);
+		nota += 1;
+	}
+	else
+	{
+		mostrarCorreccion(mensajeError);
+	}
 }
 
 function corregirSelectSimple(select, correcta, preguntaXML)
 {
+	/*
 	if(select.value == correcta)
 	{
 		nota += 1;
@@ -288,6 +342,16 @@ function corregirSelectSimple(select, correcta, preguntaXML)
 	useranswer = docXML.createElement("useranswer");
 	useranswer.innerHTML = select;
 	preguntaXML.appendChild(useranswer);
+	*/
+	if(select.value == correcta)
+	{
+		mostrarCorreccion(mensajeOK);
+		nota += 1;
+	}
+	else
+	{
+		mostrarCorreccion(mensajeError + select[correcta].innerHTML);
+	}
 }
 
 function corregirSelectMultiple(select, correctas, mensajeOK, mensajeError)
@@ -331,6 +395,7 @@ function corregirSelectMultiple(select, correctas, mensajeOK, mensajeError)
 
 function corregirRadio(radio, correcta, preguntaXML)
 {
+	/*
 	// ponemos valor -1 por si el usuario no ha seleccionado ninguna, que tenga algo que comparar
 	var value = -1;
 	for(i = 0; i < radio.length; i++)
@@ -349,6 +414,27 @@ function corregirRadio(radio, correcta, preguntaXML)
 	useranswer = docXML.createElement("useranswer");
 	useranswer.innerHTML = select;
 	preguntaXML.appendChild(useranswer);
+	*/
+	// ponemos valor -1 por si el usuario no ha seleccionado ninguna, que tenga algo que comparar
+	var value = -1;
+	for(i = 0; i < radio.length; i++)
+	{
+		// cuando encontremos el valor seleccionado, cambiamos el value y salimos del for
+		if(radio[i].checked)
+		{
+			value = i;
+			break;
+		}
+	}
+	if(value == correcta)
+	{
+		mostrarCorreccion(mensajeOK);
+		nota += 1;
+	}
+	else
+	{
+		mostrarCorreccion(mensajeError + document.getElementById(atributo+correcta).innerHTML);
+	}
 }
 
 function corregirCheckbox(checkbox, correctas, mensajeOK, mensajeError, atributo)
