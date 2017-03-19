@@ -12,7 +12,7 @@ var res_dbz10_mul = [];
 var nota = 0;  //nota de la prueba sobre 10 puntos (hay 10 preguntas)
 var docXML = null; //variable para documento XML global, para modificarlo y serializarlo (y sacarlo por pantalla)
 var docXSL = null; // variable para documento XSL
-var useranswer; // variables para crear el elemento de respuesta dle usuairo en el XML
+var useranswer = null; // variables para crear el elemento de respuesta del usuairo en el XML
 
 //**************************************************************************************************** 
 //Después de cargar la página (onload) se definen los eventos sobre los elementos entre otras acciones.
@@ -80,7 +80,9 @@ window.onload = function()
 		corregirSelectMultiple(formElement.getElementsByTagName("select")[3], 
 			res_dbz10_mul, "P10: Correcto",
 			"P10: Incorrecta, la respuestas correctas son: ");
+		console.log("Ya he corregido las preguntas");
 		mostrarNota();
+		console.log("Ya he mostrado la nota");
 		return false;
 	}
 }
