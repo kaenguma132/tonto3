@@ -245,12 +245,14 @@ function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, nodos)
 {
 	elementoHTML.innerHTML = elementoXML;
 	var i = 0;
-	for (var resultado = nodos.iterateNext(); resultado; resultado = nodos.iterateNext())
+	var resultado = nodos.iterateNext();
+	while (resultado)
 	{
-		option = document.createElement("option");
-		option.text = resultado.innerHTML;
-		option.value = i; i++;
-		selectHTML.options.add(option);
+		var option = document.createElement("option");
+		option.text = result.innerHTML;
+		option.value=i+1; i++;
+		select.options.add(option);
+		resultado = nodos.iterateNext();
 	}
 }
 
