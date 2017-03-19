@@ -29,6 +29,7 @@ window.onload = function()
 			gestionarXml(this);
 		}
 	};
+	console.log(docXML);
 	httpXML.open("GET", "xml/questions.xml", true);
 	httpXML.send();
 	//LEER XSL de xml/questions.xml
@@ -94,6 +95,7 @@ function gestionarXml(datosXML)
 {
 	// Aqui pillamos el documento XML
 	var docXML = datosXML.responseXML;
+	console.log(docXML);
 	// Llamar a pregunta XML
 	var preguntaXML;
 	// Elemento HTML donde va la pregunta
@@ -421,6 +423,6 @@ function mostrarNota()
 
 function inicializar()
 {
-	document.getElementById('correcciones').innerHTML = "";
+	document.getElementById('correcciones').innerHTML = "Aqui ira la nota final";
 	nota = 0;
 }
