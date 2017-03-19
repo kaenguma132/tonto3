@@ -231,7 +231,7 @@ function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, selectOpcio
 	}  
 }
 
-function ponerDatosCheckboxHtml(elementoHTML, elementoXML, checkboxHTML, checkboxOpciones, atributo, tipo)
+function ponerDatosCheckboxRadioHtml(elementoHTML, elementoXML, checkboxHTML, checkboxOpciones, atributo, tipo)
 {
 	elementoHTML.innerHTML = elementoXML;
 	var input;
