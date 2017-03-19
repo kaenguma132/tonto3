@@ -88,10 +88,8 @@ function gestionarXml(datosXML)
 	var preguntaXML;
 	// Elemento HTML donde va la pregunta
 	var preguntaHTML;
-	// numero de opciones que tendra un select, un radio, etc
+	// opciones que tendra un select, un radio, etc
 	var num_opciones;
-	// array de opciones en una select o multiple
-	var selectmulOpciones = [];
 	// cogemos la select
 	var selectHTML;
 	// array de opciones en una checkbox o radio
