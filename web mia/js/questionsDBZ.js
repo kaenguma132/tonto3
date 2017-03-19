@@ -395,6 +395,7 @@ function mostrarCorreccion(texto)
 
 function mostrarNota()
 {
+	/*
 	document.getElementById('correcciones').style.display = "block";
 	//Código transformación xslt con xmlDoc y xslDoc
 	if (document.implementation && document.implementation.createDocument)
@@ -404,13 +405,16 @@ function mostrarNota()
 		resultDocument = xsltProcessor.transformToFragment(docXML, document);
 		document.getElementById('correcciones').appendChild(resultDocument);
 	}
+	*/
 	mostrarCorreccion("Tu nota es de " + nota + " punto(s) sobre 10.");
-	 //bloquear formulario (recargar para volver a empezar)
-	 var e = formElement.elements;
-	 for (var i = 0, len = e.length; i < len; ++i)
-	 {
-	 	e[i].disabled = true;
-	 }
+	//bloquear formulario (recargar para volver a empezar)
+	/*
+	var e = formElement.elements;
+	for (var i = 0, len = e.length; i < len; ++i)
+	{
+		e[i].disabled = true;
+	}
+	*/
 }
 
 function inicializar()
