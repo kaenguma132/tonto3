@@ -47,7 +47,7 @@ window.onload = function()
 	formElement.onsubmit=function()
 	{
 		inicializar();
-		console.log(docXML);
+		console.log(docXML.getElementById("dbz01"));
 		// correcion pregunta 1
 		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
 			res_dbz1_text, docXML.getElementById("dbz01"));
