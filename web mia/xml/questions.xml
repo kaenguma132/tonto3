@@ -18,19 +18,21 @@
 	<question id='dbz03'>
 		<type>select</type>
 		<title>3) ¿Cuantos deseos conceden las bolas de dragon en Dragon Ball?</title>
+		<option>Selecciona una opción...</option>
 		<option>a) Tres</option>
 		<option>b) Cinco</option> 
 		<option>c) Uno</option>
-		<answer>2</answer> 
+		<answer>3</answer> 
 	</question>
 
 	<question id='dbz04'>
 		<type>select</type>
 		<title>4) ¿Qué significa el nombre de kakaroto?</title>
+		<option>Selecciona una opción...</option>
 		<option>a) Zanahoria</option>
 		<option>b) Vegetal</option> 
 		<option>c) Pimiento</option>
-		<answer>0</answer> 
+		<answer>1</answer> 
 	</question>
 
 	<question id='dbz05'>

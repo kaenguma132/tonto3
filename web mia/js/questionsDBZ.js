@@ -47,38 +47,38 @@ window.onload = function()
 	{
 		if(comprobar(formElement))
 		{
-		inicializar();
-		// correccion pregunta 1
-		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
-			res_dbz1_text, docXML.getElementById("dbz01"));
-		// correccion pregunta 2
-		corregirTexto(formElement.getElementsByClassName("texto")[1].value, 
-			res_dbz2_text, docXML.getElementById("dbz02"));
-		// correccion pregunta 3
-		corregirSelectSimple(formElement.getElementsByTagName("select")[0], 
-			res_dbz3_sel, docXML.getElementById("dbz03"));
-		// correccion pregunta 4
-		corregirSelectSimple(formElement.getElementsByTagName("select")[1], 
-			res_dbz4_sel, docXML.getElementById("dbz04"));
-		// correcion pregunta 5
-		corregirSelectMultiple(formElement.getElementsByTagName("select")[2], 
-			res_dbz5_mul, docXML.getElementById("dbz05"));
-		// correcion pregunta 6
-		corregirRadio(formElement.tiempo, 
-			res_dbz6_rad, docXML.getElementById("dbz06"), "tiempo");
-		// correccion pregunta 7
-		corregirCheckbox(formElement.saiyajin, 
-			res_dbz7_chb, docXML.getElementById("dbz07"), "saiyajin");
-		// correccion pregunta 8
-		corregirCheckbox(formElement.enemigo, 
-			res_dbz8_chb, docXML.getElementById("dbz08"), "enemigo");
-		// correcion pregunta 9
-		corregirRadio(formElement.personaje, 
-			res_dbz9_rad, docXML.getElementById("dbz09"), "personaje");
-		// correcion pregunta 5
-		corregirSelectMultiple(formElement.getElementsByTagName("select")[3], 
-			res_dbz10_mul, docXML.getElementById("dbz10"));
-		mostrarNota();
+			inicializar();
+			// correccion pregunta 1
+			corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
+				res_dbz1_text, docXML.getElementById("dbz01"));
+			// correccion pregunta 2
+			corregirTexto(formElement.getElementsByClassName("texto")[1].value, 
+				res_dbz2_text, docXML.getElementById("dbz02"));
+			// correccion pregunta 3
+			corregirSelectSimple(formElement.getElementsByTagName("select")[0], 
+				res_dbz3_sel, docXML.getElementById("dbz03"));
+			// correccion pregunta 4
+			corregirSelectSimple(formElement.getElementsByTagName("select")[1], 
+				res_dbz4_sel, docXML.getElementById("dbz04"));
+			// correcion pregunta 5
+			corregirSelectMultiple(formElement.getElementsByTagName("select")[2], 
+				res_dbz5_mul, docXML.getElementById("dbz05"));
+			// correcion pregunta 6
+			corregirRadio(formElement.tiempo, 
+				res_dbz6_rad, docXML.getElementById("dbz06"), "tiempo");
+			// correccion pregunta 7
+			corregirCheckbox(formElement.saiyajin, 
+				res_dbz7_chb, docXML.getElementById("dbz07"), "saiyajin");
+			// correccion pregunta 8
+			corregirCheckbox(formElement.enemigo, 
+				res_dbz8_chb, docXML.getElementById("dbz08"), "enemigo");
+			// correcion pregunta 9
+			corregirRadio(formElement.personaje, 
+				res_dbz9_rad, docXML.getElementById("dbz09"), "personaje");
+			// correcion pregunta 5
+			corregirSelectMultiple(formElement.getElementsByTagName("select")[3], 
+				res_dbz10_mul, docXML.getElementById("dbz10"));
+			mostrarNota();
 		}
 		else
 		{
@@ -131,7 +131,8 @@ function gestionarXml(datosXML)
 	selectHTML = document.getElementsByTagName("select")[2];
 	xpath = "/questions/question[@id='dbz05']/option";
 	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
-	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones);
+	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones, 
+		docXML.getElementById("dbz05").getElementsByTagName("option").length);
 	num_res_mul = docXML.getElementById("dbz05").getElementsByTagName("answer").length;
 	for(i = 0; i < num_res_mul; i++)
 	{
@@ -193,7 +194,8 @@ function gestionarXml(datosXML)
 	selectHTML = document.getElementsByTagName("select")[3];
 	xpath = "/questions/question[@id='dbz10']/option";
 	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
-	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones);
+	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones, 
+		docXML.getElementById("dbz10").getElementsByTagName("option").length);
 	num_res_mul = docXML.getElementById("dbz10").getElementsByTagName("answer").length;
 	for(i = 0; i < num_res_mul; i++)
 	{
@@ -208,10 +210,14 @@ function ponerDatosInputHtml(elementoHTML, elementoXML)
 	elementoHTML.innerHTML = elementoXML;
 }
 
-function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, nodos)
+function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, nodos, tamanyo)
 {
 	elementoHTML.innerHTML = elementoXML;
 	var i = 0;
+	if(tamanyo != undefined)
+	{
+		selectHTML.setAttribute("size", tamanyo);
+	}
 	for (var resultado = nodos.iterateNext(); resultado; resultado = nodos.iterateNext())
 	{
 		option = document.createElement("option");
@@ -360,6 +366,7 @@ function mostrarCorreccion(texto)
 
 function mostrarNota()
 {
+	document.getElementById("formDBZ").style.display = "none";
 	document.getElementById('correcciones').style.display = "block";
 	//Código transformación xslt con xmlDoc y xslDoc
 	if (document.implementation && document.implementation.createDocument)
@@ -369,13 +376,7 @@ function mostrarNota()
 		resultDocument = xsltProcessor.transformToFragment(docXML, document);
 		document.getElementById('correcciones').appendChild(resultDocument);
 	}
-	mostrarCorreccion("Tu nota es de " + nota + " punto(s) sobre 10.");
-	//bloquear formulario (recargar para volver a empezar)
-	var e = formElement.elements;
-	for (var i = 0, len = e.length; i < len; ++i)
-	{
-		e[i].disabled = true;
-	}
+	mostrarCorreccion("Tu nota es de " + nota.toFixed(2) + " punto(s) sobre 10.");
 }
 
 function comprobar(examen)

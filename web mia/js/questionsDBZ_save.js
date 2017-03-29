@@ -45,88 +45,45 @@ window.onload = function()
 	//CORREGIR al apretar el botón
 	formElement.onsubmit=function()
 	{
+		if(comprobar(formElement))
+		{
 		inicializar();
-		/*
-		// correcion pregunta 1
+		// correccion pregunta 1
 		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
 			res_dbz1_text, docXML.getElementById("dbz01"));
-		// correcion pregunta 2
-		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
+		// correccion pregunta 2
+		corregirTexto(formElement.getElementsByClassName("texto")[1].value, 
 			res_dbz2_text, docXML.getElementById("dbz02"));
-		// correcion pregunta 3
+		// correccion pregunta 3
 		corregirSelectSimple(formElement.getElementsByTagName("select")[0], 
 			res_dbz3_sel, docXML.getElementById("dbz03"));
-		// correcion pregunta 4
+		// correccion pregunta 4
 		corregirSelectSimple(formElement.getElementsByTagName("select")[1], 
 			res_dbz4_sel, docXML.getElementById("dbz04"));
 		// correcion pregunta 5
 		corregirSelectMultiple(formElement.getElementsByTagName("select")[2], 
-			res_dbz5_mul, "P5: Correcto",
-			"P5: Incorrecta, las respuestas correctas son: ");
+			res_dbz5_mul, docXML.getElementById("dbz05"));
 		// correcion pregunta 6
 		corregirRadio(formElement.tiempo, 
-			res_dbz6_rad, docXML.getElementById("dbz06"));
-		// correcion pregunta 7
+			res_dbz6_rad, docXML.getElementById("dbz06"), "tiempo");
+		// correccion pregunta 7
 		corregirCheckbox(formElement.saiyajin, 
-			res_dbz7_chb, "P7: Correcto",
-			"P7: Incorrecta, las respuestas correctas son: ", "saiyajin");
-		// correcion pregunta 8
+			res_dbz7_chb, docXML.getElementById("dbz07"), "saiyajin");
+		// correccion pregunta 8
 		corregirCheckbox(formElement.enemigo, 
-			res_dbz8_chb, "P8: Correcto",
-			"P8: Incorrecta, las respuestas correctas son: ", "enemigo");
+			res_dbz8_chb, docXML.getElementById("dbz08"), "enemigo");
 		// correcion pregunta 9
 		corregirRadio(formElement.personaje, 
-			res_dbz9_rad, docXML.getElementById("dbz09"));
-		// correcion pregunta 10
-		corregirSelectMultiple(formElement.getElementsByTagName("select")[3], 
-			res_dbz10_mul, "P10: Correcto",
-			"P10: Incorrecta, la respuestas correctas son: ");
-		console.log("Ya he corregido las preguntas");
-		mostrarNota();
-		console.log("Ya he mostrado la nota");
-		return false;
-		*/
-		// correcion pregunta 1
-		corregirTexto(formElement.getElementsByClassName("texto")[0].value, 
-			res_dbz1_text, "P1: Correcto", 
-			"P1: Incorrecto, la respuesta correcta es: " + res_dbz1_text);
-		// correcion pregunta 2
-		corregirTexto(formElement.getElementsByClassName("texto")[1].value, 
-			res_dbz2_text, "P2: Correcto", 
-			"P2: Incorrecto, la respuesta correcta es: " + res_dbz2_text);
-		// correcion pregunta 3
-		corregirSelectSimple(formElement.getElementsByTagName("select")[0], 
-			res_dbz3_sel, "P3: Correcto",
-			"P3: Incorrecta, la respuesta correcta es: ");
-		// correcion pregunta 4
-		corregirSelectSimple(formElement.getElementsByTagName("select")[1], 
-			res_dbz4_sel, "P4: Correcto",
-			"P4: Incorrecta, la respuesta correcta es: ");
+			res_dbz9_rad, docXML.getElementById("dbz09"), "personaje");
 		// correcion pregunta 5
-		corregirSelectMultiple(formElement.getElementsByTagName("select")[2], 
-			res_dbz5_mul, "P5: Correcto",
-			"P5: Incorrecta, las respuestas correctas son: ");
-		// correcion pregunta 6
-		corregirRadio(formElement.tiempo, 
-			res_dbz6_rad, "P6: Correcto",
-			"P6: Incorrecta, la respuesta correcta es: ", "tiempo");
-		// correcion pregunta 7
-		corregirCheckbox(formElement.saiyajin, 
-			res_dbz7_chb, "P7: Correcto",
-			"P7: Incorrecta, las respuestas correctas son: ", "saiyajin");
-		// correcion pregunta 8
-		corregirCheckbox(formElement.enemigo, 
-			res_dbz8_chb, "P8: Correcto",
-			"P8: Incorrecta, las respuestas correctas son: ", "enemigo");
-		// correcion pregunta 9
-		corregirRadio(formElement.personaje, 
-			res_dbz9_rad, "P9: Correcto",
-			"P9: Incorrecta, la respuesta correcta es: ", "personaje");
-		// correcion pregunta 10
 		corregirSelectMultiple(formElement.getElementsByTagName("select")[3], 
-			res_dbz10_mul, "P10: Correcto",
-			"P10: Incorrecta, la respuestas correctas son: ");
+			res_dbz10_mul, docXML.getElementById("dbz10"));
 		mostrarNota();
+		}
+		else
+		{
+			alert("Tienes una o más preguntas sin contestar");
+		}
 		return false;
 	}
 }
@@ -136,29 +93,7 @@ window.onload = function()
 // xmlDOC es el documento leido XML.
 function gestionarXml(datosXML)
 {
-	// Aqui pillamos el documento XML
-	var docXML = datosXML.responseXML;
-	// Llamar a pregunta XML
-	var preguntaXML;
-	// Elemento HTML donde va la pregunta
-	var preguntaHTML;
-	// opciones que tendra un select, un radio, etc
-	var num_opciones;
-	// cogemos la select
-	var selectHTML;
-	// array de opciones en una checkbox o radio
-	var checkradioOpciones = [];
-	// numero de respuestas de chechbox
-	var num_res_checkbox;
-	// cogemos la checkbox
-	var checkboxHTML;
-	// cogemos la radio button;
-	var radioHTML;
-	// numero de respuestas de multiple
-	var num_res_mul;
-	// variables de xpath
-	var xpath;
-	
+	var docXML = datosXML.responseXML; // Aqui pillamos el documento XML
 
 	//pregunta 1
 	preguntaXML = docXML.getElementsByTagName("title")[0].innerHTML;
@@ -196,7 +131,8 @@ function gestionarXml(datosXML)
 	selectHTML = document.getElementsByTagName("select")[2];
 	xpath = "/questions/question[@id='dbz05']/option";
 	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
-	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones);
+	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones, 
+		docXML.getElementById("dbz05").getElementsByTagName("option").length);
 	num_res_mul = docXML.getElementById("dbz05").getElementsByTagName("answer").length;
 	for(i = 0; i < num_res_mul; i++)
 	{
@@ -251,13 +187,15 @@ function gestionarXml(datosXML)
 	res_dbz9_rad = parseInt(docXML.getElementById("dbz09").getElementsByTagName("answer")[0].innerHTML);
 	checkradioOpciones = [];
 
+
 	//pregunta 10
 	preguntaXML = docXML.getElementsByTagName("title")[9].innerHTML;
 	preguntaHTML = document.getElementById("dbz10");
 	selectHTML = document.getElementsByTagName("select")[3];
 	xpath = "/questions/question[@id='dbz10']/option";
 	num_opciones = docXML.evaluate(xpath, docXML, null, XPathResult.ANY_TYPE, null);
-	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones);
+	ponerDatosSelectHtml(preguntaHTML, preguntaXML, selectHTML, num_opciones, 
+		docXML.getElementById("dbz10").getElementsByTagName("option").length);
 	num_res_mul = docXML.getElementById("dbz10").getElementsByTagName("answer").length;
 	for(i = 0; i < num_res_mul; i++)
 	{
@@ -272,10 +210,14 @@ function ponerDatosInputHtml(elementoHTML, elementoXML)
 	elementoHTML.innerHTML = elementoXML;
 }
 
-function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, nodos)
+function ponerDatosSelectHtml(elementoHTML, elementoXML, selectHTML, nodos, tamanyo)
 {
 	elementoHTML.innerHTML = elementoXML;
 	var i = 0;
+	if(tamanyo != undefined)
+	{
+		selectHTML.setAttribute("size", tamanyo);
+	}
 	for (var resultado = nodos.iterateNext(); resultado; resultado = nodos.iterateNext())
 	{
 		option = document.createElement("option");
@@ -310,7 +252,6 @@ function ponerDatosCheckboxRadioHtml(elementoHTML, elementoXML, checkboxradioHTM
 
 function corregirTexto(valor, correcta, preguntaXML)
 {
-	/*
 	if(valor.toLowerCase() == correcta.toLowerCase())
 	{
 		nota += 1;
@@ -318,159 +259,100 @@ function corregirTexto(valor, correcta, preguntaXML)
 	useranswer = docXML.createElement("useranswer");
 	useranswer.innerHTML = valor;
 	preguntaXML.appendChild(useranswer);
-	*/
-	if(valor.toLowerCase() == correcta.toLowerCase())
-	{
-		mostrarCorreccion(mensajeOK);
-		nota += 1;
-	}
-	else
-	{
-		mostrarCorreccion(mensajeError);
-	}
 }
 
 function corregirSelectSimple(select, correcta, preguntaXML)
 {
-	/*
-	if(select.value == correcta)
+	/* 
+		respuestaUser es el indice que ha seleccionado el usuario
+	*/
+	if(select.selectedIndex == correcta)
 	{
 		nota += 1;
 	}
 	useranswer = docXML.createElement("useranswer");
-	useranswer.innerHTML = select;
+	useranswer.innerHTML = select.selectedIndex+1;
 	preguntaXML.appendChild(useranswer);
-	*/
-	if(select.value == correcta)
-	{
-		mostrarCorreccion(mensajeOK);
-		nota += 1;
-	}
-	else
-	{
-		mostrarCorreccion(mensajeError + select[correcta].innerHTML);
-	}
 }
 
-function corregirSelectMultiple(select, correctas, mensajeOK, mensajeError)
+function corregirSelectMultiple(select, correctas, preguntaXML)
 {
-	var respuestas = [];
-	var texto_correctas = [];
-	// este for es para imprimir luego el mensaje de error
-	for(i = 0; i < correctas.length; i++)
+	var escorrecta = [];
+	for(i = 0; i < select.length; i++)
 	{
-		// select[correctas[i]].innerHTML = formElement.getElementsByTagName("select")[2][res_dbz5_mul[i]].innerHTML
-		texto_correctas[i] = select[correctas[i]].innerHTML;
-	}
-	// esto es para recoger las respuestas que ha marcado el usuario
-	for(j = 0; j < select.length; j++)
-	{
-		// si tenemos una opcion seleccionada, la guardamos dentro de una array de respuestas
-		if(select[j].selected)
+		if(select[i].selected)
 		{
-			respuestas[respuestas.length] = j;
-		}
-	}
-	// si las arrays no son iguales, dara mensaje de error
-	if(respuestas.length == correctas.length)
-	{
-		for(k = 0; k < respuestas.length; k++)
-		{
-			// si las respuestas son iguales, no saltara el break
-			if(respuestas[k] != correctas[k])
+			useranswer = docXML.createElement("useranswer");
+			useranswer.innerHTML = i+1;
+			preguntaXML.appendChild(useranswer);
+			escorrecta[i] = false;
+			for (j = 0; j < correctas.length; j++)
 			{
-				mostrarCorreccion(mensajeError + texto_correctas.join(", "));
-				break;
+				if(i == correctas[j])
+				{
+					escorrecta[i] = true;
+				}
 			}
-			mostrarCorreccion(mensajeOK);
+			if(escorrecta[i])
+			{
+				nota += 1/correctas.length;
+			}
+			else
+			{
+				nota -= 1/correctas.length;
+			}
 		}
-	}
-	else
-	{
-		mostrarCorreccion(mensajeError + texto_correctas.join(", "));
 	}
 }
 
-function corregirRadio(radio, correcta, preguntaXML)
+function corregirCheckbox(checkbox, correctas, preguntaXML, atributo)
 {
-	/*
-	// ponemos valor -1 por si el usuario no ha seleccionado ninguna, que tenga algo que comparar
-	var value = -1;
+	var escorrecta = [];
+	for(i = 0; i < checkbox.length; i++)
+	{
+		if(checkbox[i].checked)
+		{
+			useranswer = docXML.createElement("useranswer");
+			useranswer.innerHTML = i+1;
+			preguntaXML.appendChild(useranswer);
+			escorrecta[i] = false;
+			for (j = 0; j < correctas.length; j++)
+			{
+				if(i == correctas[j])
+				{
+					escorrecta[i] = true;
+				}
+			}
+			if(escorrecta[i])
+			{
+				nota += 1/correctas.length;
+			}
+			else
+			{
+				nota -= 1/correctas.length;
+			}
+		}
+	}
+}
+
+function corregirRadio(radio, correcta, preguntaXML, atributo)
+{
+	var respuesta_usuario;
 	for(i = 0; i < radio.length; i++)
 	{
 		// cuando encontremos el valor seleccionado, cambiamos el value y salimos del for
 		if(radio[i].checked)
 		{
-			value = i;
+			respuesta_usuario = i;
+			useranswer = docXML.createElement("useranswer");
+			useranswer.innerHTML = i+1;
+			preguntaXML.appendChild(useranswer);
 			break;
 		}
 	}
-	if(value == correcta)
+	if(respuesta_usuario == correcta)
 	{
 		nota += 1;
-	}
-	useranswer = docXML.createElement("useranswer");
-	useranswer.innerHTML = select;
-	preguntaXML.appendChild(useranswer);
-	*/
-	// ponemos valor -1 por si el usuario no ha seleccionado ninguna, que tenga algo que comparar
-	var value = -1;
-	for(i = 0; i < radio.length; i++)
-	{
-		// cuando encontremos el valor seleccionado, cambiamos el value y salimos del for
-		if(radio[i].checked)
-		{
-			value = i;
-			break;
-		}
-	}
-	if(value == correcta)
-	{
-		mostrarCorreccion(mensajeOK);
-		nota += 1;
-	}
-	else
-	{
-		mostrarCorreccion(mensajeError + document.getElementById(atributo+correcta).innerHTML);
-	}
-}
-
-function corregirCheckbox(checkbox, correctas, mensajeOK, mensajeError, atributo)
-{
-	var respuestas = [];
-	var texto_correctas = [];
-	// este for es para imprimir luego el mensaje de error
-	for(i = 0; i < correctas.length; i++)
-	{
-		// select[correctas[i]].innerHTML = formElement.getElementsByTagName("select")[2][res_dbz5_mul[i]].innerHTML
-		texto_correctas[i] = document.getElementById(atributo+correctas[i]).innerHTML;
-	}
-	// esto es para recoger las respuestas que ha marcado el usuario
-	for(j = 0; j < checkbox.length; j++)
-	{
-		// si tenemos una opcion seleccionada, la guardamos dentro de una array de respuestas
-		if(checkbox[j].checked)
-		{
-			respuestas[respuestas.length] = j;
-		}
-	}
-	// si las arrays no son iguales, dara mensaje de error
-	if(respuestas.length == correctas.length)
-	{
-		for(k = 0; k < respuestas.length; k++)
-		{
-			// si las respuestas son iguales, no saltara el break
-			if(respuestas[k] != correctas[k])
-			{
-				mostrarCorreccion(mensajeError + texto_correctas.join(", "));
-				break;
-			}
-			mostrarCorreccion(mensajeOK);
-		}
-	}
-	else
-	{
-		mostrarCorreccion(mensajeError + texto_correctas.join(", "));
 	}
 }
 
@@ -484,7 +366,6 @@ function mostrarCorreccion(texto)
 
 function mostrarNota()
 {
-	/*
 	document.getElementById('correcciones').style.display = "block";
 	//Código transformación xslt con xmlDoc y xslDoc
 	if (document.implementation && document.implementation.createDocument)
@@ -494,16 +375,127 @@ function mostrarNota()
 		resultDocument = xsltProcessor.transformToFragment(docXML, document);
 		document.getElementById('correcciones').appendChild(resultDocument);
 	}
-	*/
 	mostrarCorreccion("Tu nota es de " + nota + " punto(s) sobre 10.");
 	//bloquear formulario (recargar para volver a empezar)
-	/*
 	var e = formElement.elements;
 	for (var i = 0, len = e.length; i < len; ++i)
 	{
 		e[i].disabled = true;
 	}
+}
+
+function comprobar(examen)
+{
+	var comprobarOK = true;
+	// variables para comprobar si las preguntas estan contestadas
+	var multiple1Check = false;
+	var tiempoCheck = false;
+	var saiyajinCheck = false;
+	var enemigoCheck = false;
+	var personajeCheck = false;
+	var multiple2Check = false;
+	for (var i = 0; i < examen.getElementsByTagName("select")[2].length; i++)
+	{
+		if(examen.getElementsByTagName("select")[2][i].selected)
+		{
+			multiple1Check = true;
+			break;
+		}
+	}
+	for (var i = 0; i < examen.tiempo.length; i++)
+	{
+		if(examen.tiempo[i].checked)
+		{
+			tiempoCheck = true;
+			break;
+		}
+	}
+	for (var i = 0; i < examen.saiyajin.length; i++)
+	{
+		if(examen.saiyajin[i].checked)
+		{
+			saiyajinCheck = true;
+			break;
+		}
+	}
+	for (var i = 0; i < examen.enemigo.length; i++)
+	{
+		if(examen.enemigo[i].checked)
+		{
+			enemigoCheck = true;
+			break;
+		}
+	}
+	for (var i = 0; i < examen.personaje.length; i++)
+	{
+		if(examen.personaje[i].checked)
+		{
+			personajeCheck = true;
+			break;
+		}
+	}
+	for (var i = 0; i < formElement.getElementsByTagName("select")[3].length; i++)
+	{
+		if(formElement.getElementsByTagName("select")[3][i].selected)
+		{
+			multiple2Check = true;
+			break;
+		}
+	}
+	/*
+	switch(true)
+	{
+		case (examen.getElementsByClassName("texto")[0].value == ""):
+			mensaje += "Pregunta 1 sin contestar\n";
+		case (examen.getElementsByClassName("texto")[1].value == ""):
+			mensaje += "Pregunta 2 sin contestar\n";
+		case (examen.getElementsByTagName("select")[0].selectedIndex == 0):
+			mensaje += "Pregunta 3 sin contestar\n";		
+		case (examen.getElementsByTagName("select")[1].selectedIndex == 0):
+			mensaje += "Pregunta 4 sin contestar\n";
+	}
 	*/
+	if(examen.getElementsByClassName("texto")[0].value == "")
+	{
+		comprobarOK = false;
+	}
+	if(examen.getElementsByClassName("texto")[1].value == "")
+	{
+		comprobarOK = false;
+	}
+	if(examen.getElementsByTagName("select")[0].selectedIndex == 0)
+	{
+		comprobarOK = false;
+	}
+	if(examen.getElementsByTagName("select")[1].selectedIndex == 0)
+	{
+		comprobarOK = false;
+	}
+	if(!multiple1Check)
+	{
+		comprobarOK = false;
+	}
+	if(!tiempoCheck)
+	{
+		comprobarOK = false;
+	}
+	if(!saiyajinCheck)
+	{
+		comprobarOK = false;
+	}
+	if(!enemigoCheck)
+	{
+		comprobarOK = false;
+	}
+	if(!personajeCheck)
+	{
+		comprobarOK = false;
+	}
+	if(!multiple2Check)
+	{
+		comprobarOK = false;
+	}
+	return comprobarOK;
 }
 
 function inicializar()

@@ -53,14 +53,6 @@ input[type='submit']
 	margin: 0 auto;
 }
 
-#correcciones
-{
-	border-style:dotted;
-	color: white;
-	margin: 0 10% 0% 10%;
-	text-align:center;
-}
-
 select
 {
 	color: blue;
@@ -74,4 +66,8 @@ select
 #css-valid
 {
 	border:0;width:88px;height:31px
+}
+.scroll
+{
+	overflow-y:hidden;
 }
