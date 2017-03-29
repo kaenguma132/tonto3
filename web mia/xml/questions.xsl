@@ -7,7 +7,7 @@
 				<style>
 					table{width:100%;border:1px solid red}
 					th{background-color:#cdd8f6}
-					td,tr,th{border:1px solid;padding:2px;vertical-align:top}
+					td,tr,th{border:1px solid;padding:2px;vertical-align:top; background-color:#cdd8f6}
 					span{color:green;padding-left:5px}
 				</style>
 			</head>

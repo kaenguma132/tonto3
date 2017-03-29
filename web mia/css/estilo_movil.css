@@ -53,13 +53,7 @@ input[type='submit']
 	margin: 0 auto;
 }
 
-#correcciones
-{
-	border-style:dotted;
-	color: white;
-	margin: 0 10% 0% 10%;
-	text-align:center;
-}
+
 
 select
 {
