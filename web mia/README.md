@@ -17,3 +17,7 @@ Aqui es donde se mostrara todo el cuestionario hay la verdad que no si esta bien
 <b><i>xml/question</i> </b>
 
 Aquí esta el formulario que cogemos para mostrarlo en html están los 2 validadores del cual escojo uno e ellos para hacer esta practica  
+
+ <b>Añadido xpaht y funciona correctamente se muestra como toca </br>
+modificado correcciones y funciona  </br>
+añadido aviso de que no se ha contestado alguna pregunta </br> </b>
